@@ -1,5 +1,6 @@
 package com.bupt.nicetown.pojo;
 
+
 public class Result<T> {
     private Integer code;
     private String message;
