@@ -1,6 +1,8 @@
 package com.bupt.nicetown.pojo;
 
+
 import java.sql.Timestamp;
+
 
 public class User {
 
