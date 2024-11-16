@@ -20,4 +20,5 @@ public interface UserMapper {
     void register(String username, String password, String fullName, String documentType, String documentID, String phoneNumber);
 
 
+//    void login(String username, String password);
 }

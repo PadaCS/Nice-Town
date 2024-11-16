@@ -3,12 +3,16 @@ package com.bupt.nicetown.Controller;
 import com.bupt.nicetown.pojo.Result;
 import com.bupt.nicetown.pojo.User;
 import com.bupt.nicetown.service.UserService;
+import com.bupt.nicetown.utils.JwtUtil;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -44,5 +48,33 @@ public class UserController {
             return Result.success();
         }
     }
+
+
+    @PostMapping("/login")
+    public Result login(String username,
+                        @Pattern(regexp = "^(?=(.*\\d.*){2,})(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d]{6,}$",
+                                message = "密码格式错误，请重新输入") String password){
+        User u = userService.findByName(username);
+        if (u != null) {
+            if(password.equals(u.getPassword())){
+                Map<String, Object> claims = new HashMap<>();
+                claims.put("id", u.getUserID());
+                claims.put("username", u.getUserName());
+                String token = JwtUtil.genToken(claims);
+                return Result.success(token);
+            }
+            return Result.error("用户名或密码错误，请重新输入");
+        }
+        return Result.error("用户不存在，请重新输入");
+    }
+
+
+
+
+
+
+
+
+
 
 }

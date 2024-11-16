@@ -28,5 +28,4 @@ public class UserServiceImpl implements UserService {
     public void register(String username, String password, String fullName, String documentType, String documentID, String phoneNumber) {
         usermapper.register(username, password, fullName, documentType, documentID, phoneNumber);
     }
-
 }
