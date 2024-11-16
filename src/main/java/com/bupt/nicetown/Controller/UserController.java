@@ -3,6 +3,7 @@ package com.bupt.nicetown.Controller;
 import com.bupt.nicetown.pojo.Result;
 import com.bupt.nicetown.pojo.User;
 import com.bupt.nicetown.service.UserService;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @PostMapping("/register")
-    public Result register(String username, String password, String FullName, String DocumentType, String DocumentID, String phoneNumber) {
+    public Result register(String username,
+                           //校验密码格式，防止前端不干活
+                           @Pattern(regexp = "^(?=(.*\\d.*){2,})(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d]{6,}$",
+                                   message = "密码至少6位，必须包含两个数字，并且不能全为大写或小写字母") String password,
+                           String FullName,
+                           String DocumentType,
+                           String DocumentID,
+                           String phoneNumber) {
         //前端把一大堆参数返回给我，让我先检查一下你合不合规
         //看看用户名重复不重复
         User u = userService.findByName(username);

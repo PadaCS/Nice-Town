@@ -1,3 +1,8 @@
+// 这份是GPT提供的测试代码
+// 不能说毫无帮助，简直是完全没用！
+// 最后还是用postman测试的
+// GPT还是滚去写接口文档吧
+
 package com.bupt.nicetown.Controller;
 
 import com.bupt.nicetown.pojo.Result;
@@ -25,32 +30,32 @@ class UserControllerTest {
         MockitoAnnotations.openMocks(this); // 初始化 Mockito
     }
 
-    @Test
-    void testRegister_UsernameExists() {
-        // 测试参数
-        String username = "pada";
-        String password = "pada123";
-        String fullName = "测试名";
-        String documentType = "身份证";
-        String documentID = "123456789012345678";
-        String phoneNumber = "12345678901";
-
-        // 模拟用户名已存在的情况
-        User existingUser = new User();
-        existingUser.setUserName(username);
-        when(userService.findByName(username)).thenReturn(existingUser);
-
-        // 调用方法
-        Result result = userController.register(username, password, fullName, documentType, documentID, phoneNumber);
-
-        // 验证行为
-        verify(userService, times(1)).findByName(username);
-        verify(userService, never()).register(anyString(), anyString(), anyString(), anyString(), anyString(), anyString());
-
-        // 断言返回结果
-        assertEquals(1, result.getCode());
-        assertEquals("用户名已存在，请重新输入", result.getMessage());
-    }
+//    @Test
+//    void testRegister_UsernameExists() {
+//        // 测试参数
+//        String username = "pada";
+//        String password = "pada123";
+//        String fullName = "测试名";
+//        String documentType = "身份证";
+//        String documentID = "123456789012345678";
+//        String phoneNumber = "12345678901";
+//
+//        // 模拟用户名已存在的情况
+//        User existingUser = new User();
+//        existingUser.setUserName(username);
+//        when(userService.findByName(username)).thenReturn(existingUser);
+//
+//        // 调用方法
+//        Result result = userController.register(username, password, fullName, documentType, documentID, phoneNumber);
+//
+//        // 验证行为
+//        verify(userService, times(1)).findByName(username);
+//        verify(userService, never()).register(anyString(), anyString(), anyString(), anyString(), anyString(), anyString());
+//
+//        // 断言返回结果
+//        assertEquals(1, result.getCode());
+//        assertEquals("用户名已存在，请重新输入", result.getMessage());
+//    }
 
 //    @Test
 //    void testRegister_UsernameDoesNotExist() {
