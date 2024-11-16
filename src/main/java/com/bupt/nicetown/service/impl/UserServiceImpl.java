@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService {
     public void register(String username, String password, String fullName, String documentType, String documentID, String phoneNumber) {
         usermapper.register(username, password, fullName, documentType, documentID, phoneNumber);
     }
+
+    @Override
+    public void update(User user) {
+        usermapper.update(user);
+    }
 }

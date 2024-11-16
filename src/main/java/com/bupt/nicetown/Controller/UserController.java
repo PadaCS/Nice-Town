@@ -78,7 +78,14 @@ public class UserController {
         return Result.success(u);
     }
 
-
+    @PutMapping("/update")
+    public Result update(@RequestBody User user){
+        System.out.println("——————————————————————\n接收到的用户\n——————————————————————");
+        System.out.println("UserID:" + user.getUserID() + "\nusername:" + user.getUserName() + "\npassword:" + user.getPassword() + "\nFullName:" + user.getFullName() +
+                "\nDocumentType:" + user.getDocumentType() + "\nDocumentID:" + user.getDocumentID() + "\nphoneNumber:" + user.getPhonenumber());
+        userService.update(user);
+        return Result.success();
+    }
 
 
 

@@ -2,12 +2,14 @@ package com.bupt.nicetown.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
-
+@Setter
+@Getter
 public class User {
-
     private int userID;
     private String userName;
     //保护用户隐私从我做起！
@@ -25,7 +27,7 @@ public class User {
     public User() {
     }
 
-    public User(int userID, String userName, String password, String userType, String fullName,
+    public User(int userID, String UserName, String password, String userType, String fullName,
                 String documentType, String documentID, String phonenumber, String introduction,
                 Timestamp registTime, Timestamp lastModified) {
         this.userID = userID;
@@ -40,100 +42,5 @@ public class User {
         this.registTime = registTime;
         this.lastModified = lastModified;
     }
-
-    // Getters and Setters
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getDocumentType() {
-        return documentType;
-    }
-
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
-    }
-
-    public String getDocumentID() {
-        return documentID;
-    }
-
-    public void setDocumentID(String documentID) {
-        this.documentID = documentID;
-    }
-
-    public String getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-
-    public Timestamp getRegistTime() {
-        return registTime;
-    }
-
-    public void setRegistTime(Timestamp registTime) {
-        this.registTime = registTime;
-    }
-
-    public Timestamp getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Timestamp lastModified) {
-        this.lastModified = lastModified;
-    }
-
-
-
-
-
-
 }
 

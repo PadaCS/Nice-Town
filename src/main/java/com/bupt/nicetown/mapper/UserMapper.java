@@ -1,10 +1,10 @@
 package com.bupt.nicetown.mapper;
 
-import com.bupt.nicetown.pojo.Result;
 import com.bupt.nicetown.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
@@ -19,6 +19,7 @@ public interface UserMapper {
             "VALUES (#{username}, #{password}, 'normal', #{fullName}, #{documentType}, #{documentID}, #{phoneNumber})")
     void register(String username, String password, String fullName, String documentType, String documentID, String phoneNumber);
 
+    @Update("update user set FullName=#{fullName}, phonenumber=#{phonenumber}, DocumentType=#{documentType}, DocumentID=#{documentID}, introduction=#{introduction} where UserID=#{userID}")
+    void update(User user);
 
-//    void login(String username, String password);
 }
