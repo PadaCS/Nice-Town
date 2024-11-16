@@ -7,9 +7,7 @@ import com.bupt.nicetown.utils.JwtUtil;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //POST是浏览器给我数据
     @PostMapping("/register")
     public Result register(String username,
                            //校验密码格式，防止前端不干活
@@ -49,7 +48,7 @@ public class UserController {
         }
     }
 
-
+    //POST是浏览器给我数据
     @PostMapping("/login")
     public Result login(String username,
                         @Pattern(regexp = "^(?=(.*\\d.*){2,})(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d]{6,}$",
@@ -68,6 +67,16 @@ public class UserController {
         return Result.error("用户不存在，请重新输入");
     }
 
+    //GET是我给浏览器数据
+    @GetMapping("/userinfo")
+    public Result<User> userinfo( @RequestHeader(name = "Authorization") String token){
+        //从token里解析用户名
+        Map<String, Object> map = JwtUtil.parseToken(token);
+        String username = (String) map.get("username");
+        //根据用户名查询用户信息
+        User u = userService.findByName(username);
+        return Result.success(u);
+    }
 
 
 

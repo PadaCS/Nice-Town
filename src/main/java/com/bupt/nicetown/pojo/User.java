@@ -1,6 +1,8 @@
 package com.bupt.nicetown.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 
 
@@ -8,6 +10,8 @@ public class User {
 
     private int userID;
     private String userName;
+    //保护用户隐私从我做起！
+    @JsonIgnore
     private String password;
     private String userType;
     private String fullName;
