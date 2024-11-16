@@ -1,5 +1,6 @@
 package com.bupt.nicetown.mapper;
 
+import com.bupt.nicetown.pojo.Result;
 import com.bupt.nicetown.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,12 +10,14 @@ import org.apache.ibatis.annotations.Select;
 public interface UserMapper {
 
     @Select("select * from user where userID = #{id}")
-    public User findById(int id);
+    User findById(int id);
 
     @Select("select * from user where userName = #{name}")
-    public User findByName(String name);
+    User findByName(String name);
 
-    @Insert("insert into user(UserName, password)values(name, password)")
-    public int register(String name, String password);
+    @Insert("INSERT INTO user (UserName, password, UserType, FullName, DocumentType, DocumentID, phonenumber) " +
+            "VALUES (#{username}, #{password}, 'normal', #{fullName}, #{documentType}, #{documentID}, #{phoneNumber})")
+    void register(String username, String password, String fullName, String documentType, String documentID, String phoneNumber);
+
 
 }

@@ -1,6 +1,7 @@
 package com.bupt.nicetown.service.impl;
 
 import com.bupt.nicetown.mapper.UserMapper;
+import com.bupt.nicetown.pojo.Result;
 import com.bupt.nicetown.pojo.User;
 import com.bupt.nicetown.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(String username, String password){
-        usermapper.register(username, password);
+    public void register(String username, String password, String fullName, String documentType, String documentID, String phoneNumber) {
+        usermapper.register(username, password, fullName, documentType, documentID, phoneNumber);
     }
 
 }
