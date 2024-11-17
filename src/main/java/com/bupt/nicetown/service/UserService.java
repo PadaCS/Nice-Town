@@ -1,6 +1,5 @@
 package com.bupt.nicetown.service;
 import com.bupt.nicetown.pojo.User;
-import jakarta.validation.constraints.Pattern;
 
 public interface UserService {
     User findById(int id);

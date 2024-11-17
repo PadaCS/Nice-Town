@@ -8,12 +8,12 @@ import java.sql.Timestamp;
 @Setter
 @Getter
 public class Promote {
-    private int promoteID;
-    private int promotterID;
+    private int promoteID;//自动生成
+    private int promotterID;//解析token获取
     private int townID;
     private String promotType;
     private String theme;
-    private String proDescrip;
+    private String description;
     private String images;
     private String videos;
     private Timestamp createTime;
@@ -25,18 +25,35 @@ public class Promote {
 
     // 带参构造器
     public Promote(int promoteID, int promotterID, int townID, String promotType, String theme,
-                   String proDescrip, String images, String videos, Timestamp createTime,
+                   String description, String images, String videos, Timestamp createTime,
                    Timestamp lastModified, int status) {
         this.promoteID = promoteID;
         this.promotterID = promotterID;
         this.townID = townID;
-        this.promotType = promotType;
+        this.promotType = promotType;//农家院、自然风光秀丽、古建筑、土特产、特色小吃、民俗活动等
         this.theme = theme;
-        this.proDescrip = proDescrip;
+        this.description = description;
         this.images = images;
         this.videos = videos;
         this.createTime = createTime;
         this.lastModified = lastModified;
-        this.status = status;
+        this.status = status;//0：已发布；-1：已取消
+    }
+
+    @Override
+    public String toString() {
+        return "Promote{" +
+                "promoteID=" + promoteID +
+                ", promotterID=" + promotterID +
+                ", townID=" + townID +
+                ", promotType='" + promotType + '\'' +
+                ", theme='" + theme + '\'' +
+                ", description='" + description + '\'' +
+                ", images='" + images + '\'' +
+                ", videos='" + videos + '\'' +
+                ", createTime=" + createTime +
+                ", lastModified=" + lastModified +
+                ", status=" + status +
+                '}';
     }
 }
