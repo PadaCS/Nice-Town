@@ -27,7 +27,7 @@ public class User {
     public User() {
     }
 
-    public User(int userID, String UserName, String password, String userType, String fullName,
+    public User(int userID, String userName, String password, String userType, String fullName,
                 String documentType, String documentID, String phonenumber, String introduction,
                 Timestamp registTime, Timestamp lastModified) {
         this.userID = userID;
@@ -42,5 +42,16 @@ public class User {
         this.registTime = registTime;
         this.lastModified = lastModified;
     }
+
+    //默认的getter方法
+    public String getUserName() {
+        return userName;
+    }
+
+    //给数据库用的getter方法
+    public String getUsername() {
+        return userName;
+    }
+
 }
 

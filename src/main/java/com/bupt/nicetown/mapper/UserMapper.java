@@ -18,7 +18,7 @@ public interface UserMapper {
             "VALUES (#{username}, #{password}, 'normal', #{fullName}, #{documentType}, #{documentID}, #{phoneNumber})")
     void register(String username, String password, String fullName, String documentType, String documentID, String phoneNumber);
 
-    @Update("update user set FullName=#{fullName}, phonenumber=#{phonenumber}, DocumentType=#{documentType}, DocumentID=#{documentID}, introduction=#{introduction} where UserID=#{userID}")
+    @Update("update user set phonenumber=#{phonenumber}, introduction=#{introduction} where UserName=#{username}")
     void update(User user);
 
     @Update("update user set password=#{newPsw} where UserName=#{username}")

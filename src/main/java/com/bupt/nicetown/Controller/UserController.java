@@ -79,10 +79,15 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public Result update(@RequestBody User user){
+    public Result update(@RequestHeader(name = "Authorization") String token, @RequestBody User user){
+
+        //从token里解析用户名
+        Map<String, Object> map = JwtUtil.parseToken(token);
+        String username = (String) map.get("username");
+        user.setUserName(username);
+
         System.out.println("——————————————————————\n接收到的用户\n——————————————————————");
-        System.out.println("UserID:" + user.getUserID() + "\nusername:" + user.getUserName() + "\npassword:" + user.getPassword() + "\nFullName:" + user.getFullName() +
-                "\nDocumentType:" + user.getDocumentType() + "\nDocumentID:" + user.getDocumentID() + "\nphoneNumber:" + user.getPhonenumber());
+        System.out.println("username:" + user.getUserName() + "\nintroduction:" + user.getIntroduction() + "\nphoneNumber:" + user.getPhonenumber() + "\n");
         userService.update(user);
         return Result.success();
     }
