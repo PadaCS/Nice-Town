@@ -1,5 +1,6 @@
 package com.bupt.nicetown.Controller;
 
+import com.bupt.nicetown.pojo.PageBean;
 import com.bupt.nicetown.pojo.Promote;
 import com.bupt.nicetown.pojo.Result;
 import com.bupt.nicetown.pojo.User;
@@ -42,6 +43,31 @@ public class PromoteController {
             return Result.success();
         }
         return Result.error("乡镇不存在");
+    }
+
+    @GetMapping("/list")
+    public Result<PageBean<Promote>> list(int pageNum,
+                                          int pageSize,
+                                          @RequestParam(required = false)String promoteType
+    ){
+        PageBean<Promote> p = promoteService.list(pageNum,pageSize,promoteType);
+        return Result.success(p);
+    }
+
+    @GetMapping("/listmy")
+    public Result<PageBean<Promote>> listmy(int pageNum,
+                                            int pageSize,
+                                          @RequestHeader(name = "Authorization") String token,
+                                          @RequestParam(required = false)String promoteType
+    ){
+        //解析用户名，获取用户id
+        Map<String, Object> map = JwtUtil.parseToken(token);
+        String username = (String) map.get("username");
+        User u = userService.findByName(username);
+        int UserID = u.getUserID();
+
+        PageBean<Promote> p = promoteService.listmy(pageNum,pageSize,promoteType,UserID);
+        return Result.success(p);
     }
 
 }
