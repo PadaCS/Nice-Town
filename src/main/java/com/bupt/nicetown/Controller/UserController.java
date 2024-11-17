@@ -87,10 +87,25 @@ public class UserController {
         return Result.success();
     }
 
+    @PutMapping("/changePsw")
+    public Result changePsw(@RequestHeader(name = "Authorization") String token, @RequestBody Map<String,String> params){
 
+        //从token里解析用户名
+        Map<String, Object> map = JwtUtil.parseToken(token);
+        String username = (String) map.get("username");
 
+        //获取想修改密码的用户
+        String OriginPsw = params.get("OriginPsw");
+        String NewPsw = params.get("NewPsw");
+        User u = userService.findByName(username);
 
+        //比对旧密码
+        if(u.getPassword().equals(OriginPsw)){
+            //修改密码
+            userService.changePsw(NewPsw, username);
+            return Result.success();
+        }
 
-
-
+        return Result.error("旧密码输入错误，请重新输入");
+    }
 }

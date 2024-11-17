@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
-
     @Select("select * from user where userID = #{id}")
     User findById(int id);
 
@@ -22,4 +21,6 @@ public interface UserMapper {
     @Update("update user set FullName=#{fullName}, phonenumber=#{phonenumber}, DocumentType=#{documentType}, DocumentID=#{documentID}, introduction=#{introduction} where UserID=#{userID}")
     void update(User user);
 
+    @Update("update user set password=#{newPsw} where UserName=#{username}")
+    void changePsw(String newPsw, String username);
 }

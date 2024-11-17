@@ -7,6 +7,8 @@ import com.bupt.nicetown.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -32,5 +34,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
         usermapper.update(user);
+    }
+
+    @Override
+    public void changePsw(String newPsw, String username) {
+        usermapper.changePsw(newPsw, username);
     }
 }

@@ -7,4 +7,5 @@ public interface UserService {
     User findByName(String username);
     void register(String username, String password, String fullName, String documentType, String documentID, String phoneNumber);
     void update(User user);
+    void changePsw(String newPsw, String username);
 }
