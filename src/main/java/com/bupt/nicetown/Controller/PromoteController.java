@@ -4,6 +4,7 @@ import com.bupt.nicetown.pojo.Promote;
 import com.bupt.nicetown.pojo.Result;
 import com.bupt.nicetown.pojo.User;
 import com.bupt.nicetown.service.PromoteService;
+import com.bupt.nicetown.service.TownService;
 import com.bupt.nicetown.service.UserService;
 import com.bupt.nicetown.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class PromoteController {
     private PromoteService promoteService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TownService townService;
 
     @PutMapping("/create")
     public Result create(@RequestHeader(name = "Authorization") String token, @RequestBody Promote promote) {
@@ -32,11 +35,13 @@ public class PromoteController {
         //控制台输出
         System.out.println(promote);
 
-        //增加一个逻辑，判断乡镇id是否存在。
-
-        //创建宣传
-        promoteService.create(promote);
-        return Result.success();
+        //判断乡镇id是否存在。
+        if(townService.findTownByID(promote.getTownID()) != null){
+            //创建宣传
+            promoteService.create(promote);
+            return Result.success();
+        }
+        return Result.error("乡镇不存在");
     }
 
 }

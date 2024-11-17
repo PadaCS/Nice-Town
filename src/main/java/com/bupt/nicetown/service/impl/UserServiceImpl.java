@@ -14,8 +14,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper usermapper;//注入接口
-    private User user;
-//    难道之前把UserMapper写成interface也是为了现在注入用？
+
     @Override
     public User findById(int id) {
         return usermapper.findById(id);
