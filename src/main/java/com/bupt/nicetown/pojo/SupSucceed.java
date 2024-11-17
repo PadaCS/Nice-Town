@@ -1,7 +1,12 @@
 package com.bupt.nicetown.pojo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Timestamp;
 
+@Setter
+@Getter
 public class SupSucceed {
     private int promoteID;
     private int promoter;
@@ -18,46 +23,6 @@ public class SupSucceed {
         this.promoter = promoter;
         this.supportID = supportID;
         this.supporter = supporter;
-        this.acceptTime = acceptTime;
-    }
-
-    public int getPromoteID() {
-        return promoteID;
-    }
-
-    public void setPromoteID(int promoteID) {
-        this.promoteID = promoteID;
-    }
-
-    public int getPromoter() {
-        return promoter;
-    }
-
-    public void setPromoter(int promoter) {
-        this.promoter = promoter;
-    }
-
-    public int getSupportID() {
-        return supportID;
-    }
-
-    public void setSupportID(int supportID) {
-        this.supportID = supportID;
-    }
-
-    public int getSupporter() {
-        return supporter;
-    }
-
-    public void setSupporter(int supporter) {
-        this.supporter = supporter;
-    }
-
-    public Timestamp getAcceptTime() {
-        return acceptTime;
-    }
-
-    public void setAcceptTime(Timestamp acceptTime) {
         this.acceptTime = acceptTime;
     }
 }
