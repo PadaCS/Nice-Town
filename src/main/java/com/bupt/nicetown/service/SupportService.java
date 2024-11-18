@@ -12,4 +12,8 @@ public interface SupportService {
     List<Support> list(int promoteID);
 
     List<Support> listmy(int userID);
+
+    Support findByID(int supportID);
+
+    void update(Support support);
 }

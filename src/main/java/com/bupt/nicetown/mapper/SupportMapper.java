@@ -5,6 +5,7 @@ import com.bupt.nicetown.pojo.Support;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -22,4 +23,10 @@ public interface SupportMapper {
 
     @Select("select * from support where UserID=#{userID}")
     List<Support> listmy(int userID);
+
+    @Select("select * from support where SupportID=#{supportID}")
+    Support findByID(int supportID);
+
+    @Update("update support set Description=#{supDescrip}, images=#{images}, videos=#{videos} where SupportID=#{supportID}")
+    void update(Support support);
 }

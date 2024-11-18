@@ -31,4 +31,14 @@ public class SupportServiceImpl implements com.bupt.nicetown.service.SupportServ
     public List<Support> listmy(int userID) {
         return supportMapper.listmy(userID);
     }
+
+    @Override
+    public Support findByID(int supportID) {
+        return supportMapper.findByID(supportID);
+    }
+
+    @Override
+    public void update(Support support) {
+        supportMapper.update(support);
+    }
 }

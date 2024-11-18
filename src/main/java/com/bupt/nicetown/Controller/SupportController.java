@@ -67,4 +67,24 @@ public class SupportController {
         return Result.success(p);
     }
 
+    @PutMapping("/update")
+    public Result update(@RequestBody Support support) {
+        //找到这个id对应的旧助力
+        if(supportService.findByID(support.getSupportID()) == null){
+            return Result.error("助力不存在");
+        }
+        Support origin = supportService.findByID(support.getSupportID());
+        System.out.println(support);
+
+        //判断逻，如果状态!=0则不能修改。提示错误“只能修改未接受的助力”
+        if(origin.getStatus() != 0){
+            return Result.error("只能修改未接受的助力");
+        }
+
+        //更新助力
+        supportService.update(support);
+        return Result.success();
+    }
+
+
 }
