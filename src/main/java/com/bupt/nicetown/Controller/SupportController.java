@@ -70,10 +70,10 @@ public class SupportController {
     @PutMapping("/update")
     public Result update(@RequestBody Support support) {
         //找到这个id对应的旧助力
-        if(supportService.findByID(support.getSupportID()) == null){
+        Support origin = supportService.findByID(support.getSupportID());
+        if(origin == null){
             return Result.error("助力不存在");
         }
-        Support origin = supportService.findByID(support.getSupportID());
         System.out.println(support);
 
         //判断逻，如果状态!=0则不能修改。提示错误“只能修改未接受的助力”
@@ -86,5 +86,23 @@ public class SupportController {
         return Result.success();
     }
 
+    @PutMapping("/delete")
+    public Result delete(@RequestBody Support support) {
+        //找到这个id对应的旧助力
+        Support s = supportService.findByID(support.getSupportID());
+        if(s == null){
+            return Result.error("助力不存在");
+        }
+        System.out.println(support);
+
+        //判断逻，如果状态!=0则不能修改。提示错误“只能修改未接受的助力”
+        if(s.getStatus() != 0){
+            return Result.error("只能删除未接受的助力");
+        }
+
+        //更新助力
+        supportService.delete(support);
+        return Result.success();
+    }
 
 }

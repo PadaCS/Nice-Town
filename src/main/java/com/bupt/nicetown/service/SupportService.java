@@ -16,4 +16,6 @@ public interface SupportService {
     Support findByID(int supportID);
 
     void update(Support support);
+
+    void delete(Support support);
 }

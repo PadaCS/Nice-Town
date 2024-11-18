@@ -41,4 +41,9 @@ public class SupportServiceImpl implements com.bupt.nicetown.service.SupportServ
     public void update(Support support) {
         supportMapper.update(support);
     }
+
+    @Override
+    public void delete(Support support) {
+        supportMapper.delete(support);
+    }
 }

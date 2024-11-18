@@ -29,4 +29,7 @@ public interface SupportMapper {
 
     @Update("update support set Description=#{supDescrip}, images=#{images}, videos=#{videos} where SupportID=#{supportID}")
     void update(Support support);
+
+    @Update("update support set status='3' where SupportID=#{supportID}")
+    void delete(Support support);
 }
