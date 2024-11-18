@@ -40,6 +40,14 @@ public class Promote {
         this.status = status;//0：已发布；-1：已取消
     }
 
+    public String getType() {
+        return promotType;
+    }
+
+    public void setType(String promotType) {
+        this.promotType = promotType;
+    }
+
     @Override
     public String toString() {
         return "Promote{" +

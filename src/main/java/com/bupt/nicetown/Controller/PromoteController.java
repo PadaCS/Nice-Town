@@ -1,10 +1,8 @@
 package com.bupt.nicetown.Controller;
 
-import com.bupt.nicetown.pojo.PageBean;
-import com.bupt.nicetown.pojo.Promote;
-import com.bupt.nicetown.pojo.Result;
-import com.bupt.nicetown.pojo.User;
+import com.bupt.nicetown.pojo.*;
 import com.bupt.nicetown.service.PromoteService;
+import com.bupt.nicetown.service.SupportService;
 import com.bupt.nicetown.service.TownService;
 import com.bupt.nicetown.service.UserService;
 import com.bupt.nicetown.utils.JwtUtil;
@@ -22,6 +20,8 @@ public class PromoteController {
     private UserService userService;
     @Autowired
     private TownService townService;
+    @Autowired
+    private SupportService supportService;
 
     @PutMapping("/create")
     public Result create(@RequestHeader(name = "Authorization") String token, @RequestBody Promote promote) {
@@ -68,6 +68,35 @@ public class PromoteController {
 
         PageBean<Promote> p = promoteService.listmy(pageNum,pageSize,promoteType,UserID);
         return Result.success(p);
+    }
+
+    @PutMapping("/update")
+    public Result update(@RequestHeader(name = "Authorization") String token, @RequestBody Promote promote) {
+        //解析用户名，获取用户id，赋值给promote
+        Map<String, Object> map = JwtUtil.parseToken(token);
+        String username = (String) map.get("username");
+        User u = userService.findByName(username);
+        int UserID = u.getUserID();
+        promote.setPromotterID(UserID);
+        //打印一下看看
+        System.out.println(promote);
+
+        //判断status是否为未响应（通过`PromoteID`搜索`support`，如果结果!=null，则说明已有响应，返回error信息：不能修改已响应宣传）
+        Support s = supportService.findByPromoteID(promote.getPromoteID());
+        if(s != null){
+            return Result.error("不能修改已响应的宣传");
+        }
+
+        //判断乡镇id是否存在，不存在则返回error信息：乡镇不存在。
+        if(townService.findTownByID(promote.getTownID()) == null){
+            return Result.error("乡镇不存在");
+        }
+
+        //后续可能再加一点判断逻辑，判断宣传id是否存在、宣传类型是否符合格式等
+
+        //更新宣传
+        promoteService.update(promote);
+        return Result.success();
     }
 
 }

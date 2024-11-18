@@ -60,4 +60,9 @@ public class PromoteServiceImpl implements PromoteService {
         pageBean.setItems(p.getResult());
         return pageBean;
     }
+
+    @Override
+    public void update(Promote promote) {
+        promoteMapper.update(promote);
+    }
 }
