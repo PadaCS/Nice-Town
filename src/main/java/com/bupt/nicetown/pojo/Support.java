@@ -32,7 +32,7 @@ public class Support {
         this.videos = videos;
         this.createTime = createTime;
         this.lastModified = lastModified;
-        this.status = status;
+        this.status = status;//0：待接受；1：同意；2：拒绝；3：取消
     }
 
     @Override
