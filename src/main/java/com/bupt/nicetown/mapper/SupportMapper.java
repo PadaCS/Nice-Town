@@ -32,4 +32,10 @@ public interface SupportMapper {
 
     @Update("update support set status='3' where SupportID=#{supportID}")
     void delete(Support support);
+
+    @Update("update support set status='1' where SupportID=#{supportID}")
+    void accept(int supportID);
+
+    @Update("update support set status='2' where SupportID=#{supportID}")
+    void deny(int supportID);
 }

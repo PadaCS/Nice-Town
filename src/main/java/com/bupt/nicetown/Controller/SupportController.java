@@ -97,7 +97,7 @@ public class SupportController {
 
         //判断逻，如果状态!=0则不能修改。提示错误“只能修改未接受的助力”
         if(s.getStatus() != 0){
-            return Result.error("只能删除未接受的助力");
+            return Result.error("只能删除状态为未接受的助力");
         }
 
         //更新助力
@@ -105,4 +105,46 @@ public class SupportController {
         return Result.success();
     }
 
+    @PutMapping("/operate")
+    public Result accept(int promoteID, int supportID, int operation) {
+        //先把这俩找到
+        Promote promote = promoteService.findByID(promoteID);
+        Support support = supportService.findByID(supportID);
+
+        //一些错误处理
+        if(promote == null || support == null){
+            return Result.error("宣传或助力不存在");
+        }
+
+        //赋值用户id
+        int promoterID = promote.getPromotterID();
+        int supporterID = support.getSupportID();
+
+
+        if(promote.getStatus() != 0){
+            return Result.error("非公开宣传不可操作助力");
+        }
+
+        if (support.getStatus() != 0) {
+            return Result.error("助力已被接受、拒绝或删除");
+        }
+
+        //operation为1是接受，2是拒绝
+        return switch (operation) {
+            case 1 -> {
+                supportService.accept(promoteID, promoterID, supportID, supporterID);
+                yield Result.success();
+            }
+            case 2 -> {
+                supportService.deny(supportID);
+                yield Result.success();
+            }
+//            我是真的很想把删除也加进来，但是它实在是不需要promoteID
+//            case 3 -> {
+//                supportService.delete(support);
+//                yield Result.success();
+//            }
+            default -> Result.error("操作失败");
+        };
+    }
 }
