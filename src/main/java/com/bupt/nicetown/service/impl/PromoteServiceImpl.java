@@ -70,4 +70,9 @@ public class PromoteServiceImpl implements PromoteService {
     public void delete(Promote promote) {
         promoteMapper.delete(promote);
     }
+
+    @Override
+    public Promote findByID(int promoteID) {
+        return promoteMapper.findByID(promoteID);
+    }
 }

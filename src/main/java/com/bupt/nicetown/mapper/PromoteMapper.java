@@ -1,10 +1,7 @@
 package com.bupt.nicetown.mapper;
 
 import com.bupt.nicetown.pojo.Promote;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -24,4 +21,7 @@ public interface PromoteMapper {
 
     @Update("UPDATE Promote SET status = -1 WHERE PromoteID = #{promoteID}")
     void delete(Promote promote);
+
+    @Select("select * from promote where PromoteID = #{promoteID}")
+    Promote findByID(int promoteID);
 }

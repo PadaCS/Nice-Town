@@ -34,5 +34,21 @@ public class Support {
         this.lastModified = lastModified;
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Support{" +
+                "supportID=" + supportID +
+                ", promoteID=" + promoteID +
+                ", userID=" + userID +
+                ", supDescrip='" + supDescrip + '\'' +
+                ", images='" + images + '\'' +
+                ", videos='" + videos + '\'' +
+                ", createTime=" + createTime +
+                ", lastModified=" + lastModified +
+                ", status=" + status +
+                '}';
+    }
+
 }
 

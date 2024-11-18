@@ -2,6 +2,7 @@ package com.bupt.nicetown.mapper;
 
 import com.bupt.nicetown.pojo.SupSucceed;
 import com.bupt.nicetown.pojo.Support;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -9,4 +10,8 @@ import org.apache.ibatis.annotations.Select;
 public interface SupportMapper {
     @Select("select * from support where PromoteID = #{promoteID}")
     Support findByPromoteID(int promoteID);
+
+    @Insert("INSERT INTO Support (PromoteID, UserID, Description, images, videos, status) " +
+            "VALUES (#{promoteID}, #{userID}, #{supDescrip}, #{images}, #{videos}, 0)")
+    void create(Support support);
 }

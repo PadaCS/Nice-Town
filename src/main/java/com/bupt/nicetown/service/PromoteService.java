@@ -13,4 +13,6 @@ public interface PromoteService {
     void update(Promote promote);
 
     void delete(Promote promote);
+
+    Promote findByID(int promoteID);
 }
