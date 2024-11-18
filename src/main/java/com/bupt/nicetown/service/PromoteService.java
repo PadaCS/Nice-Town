@@ -11,4 +11,6 @@ public interface PromoteService {
     PageBean<Promote> listmy(int pageNum, int pageSize, String promoteType, int userID);
 
     void update(Promote promote);
+
+    void delete(Promote promote);
 }

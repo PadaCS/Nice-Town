@@ -93,9 +93,26 @@ public class PromoteController {
         }
 
         //后续可能再加一点判断逻辑，判断宣传id是否存在、宣传类型是否符合格式等
+        //不过已取消（删除）的宣传是可以修改的。
 
         //更新宣传
         promoteService.update(promote);
+        return Result.success();
+    }
+
+    @PutMapping("/delete")
+    public Result delete(@RequestBody Promote promote) {
+        //打印一下看看
+        System.out.println(promote);
+
+        //判断status是否为未响应（通过`PromoteID`搜索`support`，如果结果!=null，则说明已有响应，返回error信息：不能修改已响应宣传）
+        Support s = supportService.findByPromoteID(promote.getPromoteID());
+        if(s != null){
+            return Result.error("不能删除已响应的宣传");
+        }
+
+        //删除宣传
+        promoteService.delete(promote);
         return Result.success();
     }
 

@@ -65,4 +65,9 @@ public class PromoteServiceImpl implements PromoteService {
     public void update(Promote promote) {
         promoteMapper.update(promote);
     }
+
+    @Override
+    public void delete(Promote promote) {
+        promoteMapper.delete(promote);
+    }
 }
