@@ -9,7 +9,9 @@ import com.bupt.nicetown.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/promote")
@@ -69,6 +71,21 @@ public class PromoteController {
         PageBean<Promote> p = promoteService.listmy(pageNum,pageSize,promoteType,UserID);
         return Result.success(p);
     }
+
+    @PostMapping("/town")
+    public Result<List<Town>> getTownsByIDs(@RequestBody List<Integer> townIDs) {
+        if (townIDs == null || townIDs.isEmpty()) {
+            return Result.error("The town ID list is empty.");
+        }
+
+        // 遍历 townIDs 列表，提取 Town 对象
+        List<Town> towns = townIDs.stream()
+                .map(townService::findTownByID)
+                .collect(Collectors.toList());
+
+        return Result.success(towns);
+    }
+
 
     @PutMapping("/update")
     public Result update(@RequestHeader(name = "Authorization") String token, @RequestBody Promote promote) {

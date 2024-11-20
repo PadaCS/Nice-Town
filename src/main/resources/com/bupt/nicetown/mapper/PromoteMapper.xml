@@ -8,7 +8,7 @@
         select * from promote
         <where>
             <if test="promoteType!=null">
-                Type=#{promoteType}
+                PromoteType=#{promoteType}
             </if>
         </where>
     </select>
@@ -16,7 +16,7 @@
         select * from promote
         <where>
             <if test="promoteType!=null">
-                Type=#{promoteType}
+                PromoteType=#{promoteType}
             </if>
 
             and PromotterID=#{userID}

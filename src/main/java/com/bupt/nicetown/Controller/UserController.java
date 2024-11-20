@@ -39,6 +39,12 @@ public class UserController {
             System.out.println("——————————————————————\n检测到用户名已存在\n——————————————————————");
             return Result.error("用户名已存在，请重新输入");
         }else {
+
+            //必须填写身份信息
+            if(DocumentType == null || DocumentID == null) {
+                return Result.error("身份信息不得为空");
+            }
+
             //没占用就注册
             System.out.println("——————————————————————\n注册用户\n——————————————————————");
             System.out.println("username:" + username + "\npassword:" + password + "\nFullName:" + FullName +
