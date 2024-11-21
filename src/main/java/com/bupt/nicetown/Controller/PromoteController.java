@@ -75,7 +75,7 @@ public class PromoteController {
     @PostMapping("/town")
     public Result<List<Town>> getTownsByIDs(@RequestBody List<Integer> townIDs) {
         if (townIDs == null || townIDs.isEmpty()) {
-            return Result.error("The town ID list is empty.");
+            return Result.success();
         }
 
         // 遍历 townIDs 列表，提取 Town 对象

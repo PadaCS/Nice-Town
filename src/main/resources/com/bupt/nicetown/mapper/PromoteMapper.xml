@@ -10,6 +10,7 @@
             <if test="promoteType!=null">
                 PromoteType=#{promoteType}
             </if>
+            and status=0
         </where>
     </select>
     <select id="listmy" resultType="com.bupt.nicetown.pojo.Promote">
@@ -18,6 +19,7 @@
             <if test="promoteType!=null">
                 PromoteType=#{promoteType}
             </if>
+            and status=0
 
             and PromotterID=#{userID}
         </where>
