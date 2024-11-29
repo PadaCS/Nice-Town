@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface SupportMapper {
     @Select("select * from support where PromoteID = #{promoteID}")
-    Support findByPromoteID(int promoteID);
+    List<Support> findByPromoteID(int promoteID);
 
     @Insert("INSERT INTO Support (PromoteID, UserID, Description, images, videos, status) " +
             "VALUES (#{promoteID}, #{userID}, #{supDescrip}, #{images}, #{videos}, 0)")

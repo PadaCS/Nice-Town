@@ -17,7 +17,7 @@ public class SupportServiceImpl implements com.bupt.nicetown.service.SupportServ
     private SupSucceedMapper supSucceedMapper;
 
     @Override
-    public Support findByPromoteID(int promoteID) {
+    public List<Support> findByPromoteID(int promoteID) {
         return supportMapper.findByPromoteID(promoteID);
     }
 

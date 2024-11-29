@@ -6,7 +6,7 @@ import com.bupt.nicetown.pojo.Support;
 import java.util.List;
 
 public interface SupportService {
-    Support findByPromoteID(int promoteID);
+    List<Support> findByPromoteID(int promoteID);
 
     void create(Support support);
 

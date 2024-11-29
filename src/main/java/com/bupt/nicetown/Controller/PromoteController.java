@@ -100,8 +100,8 @@ public class PromoteController {
         System.out.println(promote);
 
         //判断status是否为未响应（通过`PromoteID`搜索`support`，如果结果!=null，则说明已有响应，返回error信息：不能修改已响应宣传）
-        Support s = supportService.findByPromoteID(promote.getPromoteID());
-        if(s != null){
+        List<Support> supportList = supportService.findByPromoteID(promote.getPromoteID());
+        if(supportList != null){
             return Result.error("不能修改已响应的宣传");
         }
 
@@ -124,8 +124,8 @@ public class PromoteController {
         System.out.println(promote);
 
         //判断status是否为未响应（通过`PromoteID`搜索`support`，如果结果!=null，则说明已有响应，返回error信息：不能修改已响应宣传）
-        Support s = supportService.findByPromoteID(promote.getPromoteID());
-        if(s != null){
+        List<Support> supportList = supportService.findByPromoteID(promote.getPromoteID());
+        if(supportList != null){
             return Result.error("不能删除已响应的宣传");
         }
 
