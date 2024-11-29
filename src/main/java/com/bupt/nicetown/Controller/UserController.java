@@ -1,5 +1,6 @@
 package com.bupt.nicetown.Controller;
 
+import com.bupt.nicetown.pojo.Promote;
 import com.bupt.nicetown.pojo.Result;
 import com.bupt.nicetown.pojo.User;
 import com.bupt.nicetown.service.UserService;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -64,7 +67,7 @@ public class UserController {
             if(password.equals(u.getPassword())){
                 Map<String, Object> claims = new HashMap<>();
                 claims.put("id", u.getUserID());
-                claims.put("username", u.getUserName());
+                claims.put("username", u.getUsername());
                 String token = JwtUtil.genToken(claims);
                 return Result.success(token);
             }
@@ -90,10 +93,10 @@ public class UserController {
         //从token里解析用户名
         Map<String, Object> map = JwtUtil.parseToken(token);
         String username = (String) map.get("username");
-        user.setUserName(username);
+        user.setUsername(username);
 
         System.out.println("——————————————————————\n接收到的用户\n——————————————————————");
-        System.out.println("username:" + user.getUserName() + "\nintroduction:" + user.getIntroduction() + "\nphoneNumber:" + user.getPhonenumber() + "\n");
+        System.out.println("username:" + user.getUsername() + "\nintroduction:" + user.getIntroduction() + "\nphoneNumber:" + user.getPhonenumber() + "\n");
         userService.update(user);
         return Result.success();
     }
@@ -119,4 +122,19 @@ public class UserController {
 
         return Result.error("旧密码输入错误，请重新输入");
     }
+
+    @GetMapping("/get")
+    public Result<List<String>> findUserByID( @RequestParam("userID") int[] userID ){
+        List<String> userNameList = new ArrayList<>();
+        for (int id : userID) {
+            //根据用户id查询用户名
+            User u = userService.findById(id); // 使用数组元素作为参数
+            System.out.println(u.getUsername());
+            if (u != null) {  // 检查返回的 Promote 是否为 null
+                userNameList.add(u.getUsername());
+            }
+        }
+        return Result.success(userNameList);
+    }
+
 }

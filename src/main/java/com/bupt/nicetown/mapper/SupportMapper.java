@@ -18,7 +18,7 @@ public interface SupportMapper {
             "VALUES (#{promoteID}, #{userID}, #{supDescrip}, #{images}, #{videos}, 0)")
     void create(Support support);
 
-    @Select("select * from support where PromoteID=#{promoteID} and status='0'")
+    @Select("select * from support where PromoteID=#{promoteID}")
     List<Support> list(int promoteID);
 
     @Select("select * from support where UserID=#{userID}")

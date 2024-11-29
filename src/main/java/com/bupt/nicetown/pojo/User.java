@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Getter
 public class User {
     private int userID;
-    private String userName;
+    private String username;
     //保护用户隐私从我做起！
     @JsonIgnore
     private String password;
@@ -27,11 +27,11 @@ public class User {
     public User() {
     }
 
-    public User(int userID, String userName, String password, String userType, String fullName,
+    public User(int userID, String username, String password, String userType, String fullName,
                 String documentType, String documentID, String phonenumber, String introduction,
                 Timestamp registTime, Timestamp lastModified) {
         this.userID = userID;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.userType = userType;
         this.fullName = fullName;
@@ -41,16 +41,6 @@ public class User {
         this.introduction = introduction;
         this.registTime = registTime;
         this.lastModified = lastModified;
-    }
-
-    //默认的getter方法
-    public String getUserName() {
-        return userName;
-    }
-
-    //给数据库用的getter方法
-    public String getUsername() {
-        return userName;
     }
 
 }

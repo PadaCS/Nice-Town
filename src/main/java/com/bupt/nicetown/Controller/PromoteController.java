@@ -9,6 +9,7 @@ import com.bupt.nicetown.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -133,4 +134,17 @@ public class PromoteController {
         return Result.success();
     }
 
+    @GetMapping("/find")
+    public Result<Promote[]> findPromoteByID(@RequestParam("promoteID") int[] promoteID){
+        List<Promote> promoteList = new ArrayList<>();
+        for (int id : promoteID) {
+            Promote p = promoteService.findByID(id); // 使用数组元素作为参数
+            if (p != null) {  // 检查返回的 Promote 是否为 null
+                promoteList.add(p);
+            }
+        }
+        // 将列表转换为数组
+        Promote[] promotesArray = promoteList.toArray(new Promote[0]);
+        return Result.success(promotesArray);
+    }
 }

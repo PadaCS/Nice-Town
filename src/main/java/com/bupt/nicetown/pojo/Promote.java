@@ -46,7 +46,7 @@ public class Promote {
                 "promoteID=" + promoteID +
                 ", promotterID=" + promotterID +
                 ", townID=" + townID +
-                ", promotType='" + promoteType + '\'' +
+                ", promoteType='" + promoteType + '\'' +
                 ", theme='" + theme + '\'' +
                 ", description='" + description + '\'' +
                 ", images='" + images + '\'' +
