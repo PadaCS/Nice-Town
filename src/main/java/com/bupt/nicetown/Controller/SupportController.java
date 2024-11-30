@@ -51,8 +51,9 @@ public class SupportController {
 
     @GetMapping("/list")
     public Result<List<Support>> list(int promoteID){
-        List<Support> p = supportService.list(promoteID);
-        return Result.success(p);
+        List<Support> s = supportService.list(promoteID);
+        System.out.println("/list查询到的support：" + s.toString());
+        return Result.success(s);
     }
 
     @GetMapping("/listmy")

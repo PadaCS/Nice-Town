@@ -14,7 +14,7 @@ public interface SupportMapper {
     @Select("select * from support where PromoteID = #{promoteID}")
     List<Support> findByPromoteID(int promoteID);
 
-    @Insert("INSERT INTO Support (PromoteID, UserID, Description, images, videos, status) " +
+    @Insert("INSERT INTO Support (PromoteID, UserID, supDescrip, images, videos, status) " +
             "VALUES (#{promoteID}, #{userID}, #{supDescrip}, #{images}, #{videos}, 0)")
     void create(Support support);
 
@@ -27,7 +27,7 @@ public interface SupportMapper {
     @Select("select * from support where SupportID=#{supportID}")
     Support findByID(int supportID);
 
-    @Update("update support set Description=#{supDescrip}, images=#{images}, videos=#{videos} where SupportID=#{supportID}")
+    @Update("update support set supDescrip=#{supDescrip}, images=#{images}, videos=#{videos} where SupportID=#{supportID}")
     void update(Support support);
 
     @Update("update support set status='3' where SupportID=#{supportID}")
