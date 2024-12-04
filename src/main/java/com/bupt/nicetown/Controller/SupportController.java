@@ -90,6 +90,7 @@ public class SupportController {
     @PutMapping("/delete")
     public Result delete(@RequestBody Support support) {
         //找到这个id对应的旧助力
+        System.out.println("Support ID: " + support.getSupportID());
         Support s = supportService.findByID(support.getSupportID());
         if(s == null){
             return Result.error("助力不存在");

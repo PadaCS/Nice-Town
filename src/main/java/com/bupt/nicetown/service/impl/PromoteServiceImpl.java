@@ -33,11 +33,11 @@ public class PromoteServiceImpl implements PromoteService {
 
         //调用mapper查询
         List<Promote> l = promoteMapper.list(promoteType);
-        System.out.println("mapper返回结果l：" + l);
+//        System.out.println("mapper返回结果l：" + l);
 
         //类型强制转换
         Page<Promote> p = (Page<Promote>) l;
-        System.out.println("类型强制转换后的结果p：" + p);
+//        System.out.println("类型强制转换后的结果p：" + p);
 
         //把数据填充到PageBean中
         pageBean.setTotal(p.getTotal());
@@ -55,10 +55,10 @@ public class PromoteServiceImpl implements PromoteService {
 
         //调用mapper查询
         List<Promote> l = promoteMapper.listmy(promoteType,userID);
-        System.out.println("mapper返回结果l：" + l);
+//        System.out.println("mapper返回结果l：" + l);
         //类型强制转换
         Page<Promote> p = (Page<Promote>) l;
-        System.out.println("类型强制转换后的结果p：" + p);
+//        System.out.println("类型强制转换后的结果p：" + p);
 
         //把数据填充到PageBean中
         pageBean.setTotal(p.getTotal());
