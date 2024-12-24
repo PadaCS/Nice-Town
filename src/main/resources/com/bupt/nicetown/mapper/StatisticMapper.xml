@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.nicetown.mapper.StatisticMapper">
+<!--    动态sql-->
+
+    <select id="sumByMap" resultType="int">
+        SELECT COUNT(DISTINCT PromotterID)
+        FROM promote
+        WHERE TownID = #{townId}
+          AND CreateTime BETWEEN #{begin} AND #{end}
+    </select>
+    <select id="sumSupportUserIDs" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT s.UserID)
+        FROM support s
+        WHERE s.PromoteID IN (
+        <!-- 从 promote 表中获取符合条件的 PromoteID -->
+        SELECT p.PromoteID
+        FROM promote p
+        WHERE p.TownID = #{townId}
+        )
+        AND s.CreateTime BETWEEN #{begin} AND #{end}  <!-- 根据 support 表中的 CreateTime 进行过滤 -->
+    </select>
+</mapper>
